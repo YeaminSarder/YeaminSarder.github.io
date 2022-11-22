@@ -1,0 +1,49 @@
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel='stylesheet' href='css/jquery-ui.css'>
+    <script src="libs/jquery-3.6.1.js"></script>
+    <script src="libs/jquery-ui.js"></script>
+    <script src="libs/jquery.color.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#date").datepicker()
+            $.widget("cusotm.HW_Loader",{
+                _create: function() {
+                    this.element.text('Hello World');
+                }
+            });
+            $("#hl").HW_Loader()
+            $("#nav-tab").tabs({
+                "active":1
+            })
+            $("#nav-tab #folder").load("00_folder.html",null,function () {
+                linkclick = function (e,ui){
+                            if (ui.newHeader.find("> a").attr('href')) {
+                                $("#main").load(ui.newHeader.find("> a").attr('href'))
+                                $("#nav-tab").tabs({active:1})
+                            $("#nav-tab").tabs("refresh")
+                                
+                            }
+                };
+            })
+        })
+
+    </script>
+
+</head>
+<body style="background-color:#333333; color:#eeeeee;">
+    <div id='hl' class="ui-widget"> </div>
+    <div id='nav-tab'>
+        <ul>
+            <li><a href="#folder">Folder</a></li>
+            <li><a href="#main">main</a></li>
+        </ul>
+        <div id="folder">
+            <p> abc </p>
+        </div>
+        <div id="main">
+            <div id='date'> </div>
+
+        </div>
+    </div>
+</body>

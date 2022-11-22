@@ -1,0 +1,99 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel='stylesheet' href='css/jquery-ui.css'>
+    <script src="libs/jquery.js"></script>
+    <script src="libs/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            var filename = "00_folders.html"
+
+
+            $(".folder-list").accordion({
+                "event":"click",
+                "header": "> li > :first-child",
+                "heightStyle": "content",
+                "collapsible": true,
+                "active": false,
+                "icons" : { "header": "ui-icon-plus", "activeHeader": "ui-icon-minus" },
+                "beforeActivate" : function (e,ui) {
+                    var maxW = e.currentTarget.clientWidth //width of header
+                    var clicked = (e.offsetX < maxW/2) ? "left" : "right"
+                    //alert(e.currentTarget.clientWidth)
+
+                    switch (clicked) {
+                        case "left":
+                            if (typeof linkclick === 'undefined') {
+                            if (ui.newHeader.find("> a").attr('href')) {
+                                window.location.href = ui.newHeader.find("> a").attr('href')
+                            }
+                            }else if (typeof linkclick === 'function') { 
+                            //define linkclick as global function
+                                linkclick(e,ui)
+                                //linkclick()
+                            } else {
+                                alert("linkclick must be a global function that handles click events on links")
+                            }
+
+                            break;
+                        case "right":
+                            break;
+                    }
+                }
+
+            }) 
+        })
+
+    </script>
+
+
+
+
+<style>
+p {
+    color: red;
+}
+</style>
+</head>
+<body>
+<!--p class="ui-widget-header"> folder </p-->
+
+<ul class="folder-list">
+    <li><h3><a href="note_1.html" >Folder 1</a></h3>
+
+        <ul class="folder-list"> 
+            <li><h3> Folder 1.1 </h3>
+                <div>
+                    content
+                </div>
+            </li>
+            <li><h3> Folder 1.2 </h3>
+                <div>
+                    content
+                </div>
+            </li>
+            <li><h3> Folder 1.3 </h3>
+                <div>
+                    content
+                </div>
+            </li>
+            </div>
+        </ul>
+    </li>
+
+    <li><div><a> Folder 2 </a></div>
+        <div> content </div>
+    </li>
+    <li><div><a> Folder 3 </a></div>
+        <div> content </div>
+    </li>
+    <li><div><a> Folder 4 </a></div>
+
+        <div> content </div>
+        </div>
+    </li>
+</ul>
+
+<span class="ui-icon ui-icon-caret-1-n" style="display:inline-block">he</span>
+</body>
+</html>
